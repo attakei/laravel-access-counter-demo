@@ -3,31 +3,31 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use Attakei\AccessCounter\TextSVGImage;
+use App\AccessCounter\ImageWriters\TextSVGImageWriter;
 
 class TextSVGImageWriterTest extends TestCase
 {
     public function testViewBox_Default()
     {
-        $image = new TextSVGImage();
+        $image = new TextSVGImageWriter();
         $this->assertEquals($image->getViewBox(), '0 0 200 20');
     }
 
     public function testViewBox_SetWidth()
     {
-        $image = new TextSVGImage(100);
+        $image = new TextSVGImageWriter(100);
         $this->assertEquals($image->getViewBox(), '0 0 100 20');
     }
 
     public function testViewBox_SetHeight()
     {
-        $image = new TextSVGImage(null, 30);
+        $image = new TextSVGImageWriter(null, 30);
         $this->assertEquals($image->getViewBox(), '0 0 200 30');
     }
 
     public function testDOM_Struct()
     {
-        $image = new TextSVGImage();
+        $image = new TextSVGImageWriter();
         $dom = $image->getDOM();
         $this->assertInstanceOf('DOMDocument', $dom);
         $svgTagList = $dom->getElementsByTagName('svg');
@@ -38,7 +38,7 @@ class TextSVGImageWriterTest extends TestCase
 
     public function testDOM_TextValue()
     {
-        $image = new TextSVGImage();
+        $image = new TextSVGImageWriter();
         $image->setText('Hello');
         $dom = $image->getDOM();
         $textTag = $dom->getElementsByTagName('text')[0];
@@ -47,7 +47,7 @@ class TextSVGImageWriterTest extends TestCase
 
     public function testContent()
     {
-        $image = new TextSVGImage();
+        $image = new TextSVGImageWriter();
         $image->setText('Hello');
         $content = $image->getContent();
         $this->assertContains('Hello</text>', $content);
