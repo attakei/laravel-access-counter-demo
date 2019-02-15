@@ -28,7 +28,7 @@ class DatabaseCounter
     {
         $this->data->score++;
         $this->data->save();
-        return $this->data;
+        return $this->data->score;
     }
 
     public function format()
