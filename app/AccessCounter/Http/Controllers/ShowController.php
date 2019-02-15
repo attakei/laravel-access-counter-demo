@@ -17,7 +17,9 @@ class ShowController extends BaseController
         $counterKey = $request->input('key', 'default');
         $counter = new FilesystemCounter($counterKey);
         $counter->increase();
-        $writer = new TextSVGImageWriter();
+        $imageWidth = $request->input('w', null);
+        $imageHeight = $request->input('h', null);
+        $writer = new TextSVGImageWriter($imageWidth, $imageHeight);
         $writer->setText($counter->format());
         $response = new Response($writer->getContent());
         $response->header('Content-Type', 'image/svg+xml');

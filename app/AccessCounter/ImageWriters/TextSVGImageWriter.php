@@ -56,8 +56,10 @@ class TextSVGImageWriter
         $svg->setAttribute('height', $this->height);
         $svg->setAttribute('viewBox', $this->getViewBox());
         $text = $dom->createElement('text', $this->text);
-        $text->setAttribute('x', 0);
-        $text->setAttribute('y', 20);
+        $text->setAttribute('font-size', "{$this->height}px");
+        $text->setAttribute('x', $this->width);
+        $text->setAttribute('y', $this->height * 0.9);
+        $text->setAttribute('text-anchor', 'end');
         $svg->appendChild($text);
         $dom->appendChild($svg);
         return $dom;
