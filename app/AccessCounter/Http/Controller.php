@@ -14,7 +14,8 @@ class Controller extends BaseController
 {
     public function getCounter(Request $request)
     {
-        $counter = new FilesystemCounter();
+        $counterKey = $request->input('key', 'default');
+        $counter = new FilesystemCounter($counterKey);
         $counter->increase();
         $writer = new TextSVGImageWriter();
         $writer->setText($counter->format());

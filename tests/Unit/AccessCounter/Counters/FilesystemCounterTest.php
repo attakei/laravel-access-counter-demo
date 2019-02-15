@@ -22,4 +22,12 @@ class FilesystemCounterTest extends TestCase
         $counter->increase();
         $this->assertEquals($counter->format(), "1");
     }
+
+    public function testCountWithKey()
+    {
+        Storage::fake('local');
+        $counter = new FilesystemCounter('example');
+        $this->assertFalse(Storage::disk('local')->exists('counter/default.dat'));
+        $this->assertTrue(Storage::disk('local')->exists('counter/example.dat'));
+    }
 }
