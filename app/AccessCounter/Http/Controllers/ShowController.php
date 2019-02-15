@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AccessCounter\Http;
+namespace App\AccessCounter\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -10,7 +10,7 @@ use App\AccessCounter\Counters\FilesystemCounter;
 use Storage;
 
 
-class Controller extends BaseController
+class ShowController extends BaseController
 {
     public function getCounter(Request $request)
     {
