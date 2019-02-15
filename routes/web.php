@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/counter', '\App\AccessCounter\Http\Controller@getCounter');
