@@ -6,7 +6,8 @@ use Storage;
 
 class FilesystemCounter
 {
-    const DEFAULT_PATH = 'count.dat';
+    const BASE_PATH = 'counter/';
+    const DEFAULT_PATH = 'default.dat';
     private $data = 0;
     private $savePath = '';
 
@@ -15,7 +16,7 @@ class FilesystemCounter
         if (is_null($path)) {
             $path = static::DEFAULT_PATH;
         }
-        $this->savePath = $path;
+        $this->savePath = static::BASE_PATH . '/' . $path;
         if (!Storage::disk('local')->exists($this->savePath)) {
             Storage::put($this->savePath, 0);
         }
