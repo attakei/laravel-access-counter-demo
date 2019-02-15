@@ -49,17 +49,20 @@ class TextSVGImageWriter
      */
     public function getDOM()
     {
+        $this->width = $this->height * strlen($this->text);
         $dom = new \DOMDocument();
+        $text = $dom->createElement('text', $this->text);
+        $text->setAttribute('font-size', "{$this->height}px");
+        $text->setAttribute('font-family', 'monospace');
+        $text->setAttribute('font-weight', 'bolder');
+        $text->setAttribute('x', "100%");
+        $text->setAttribute('y', "90%");
+        $text->setAttribute('text-anchor', 'end');
         $svg = $dom->createElement('svg');
         $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
         $svg->setAttribute('width', $this->width);
         $svg->setAttribute('height', $this->height);
         $svg->setAttribute('viewBox', $this->getViewBox());
-        $text = $dom->createElement('text', $this->text);
-        $text->setAttribute('font-size', "{$this->height}px");
-        $text->setAttribute('x', $this->width);
-        $text->setAttribute('y', $this->height * 0.9);
-        $text->setAttribute('text-anchor', 'end');
         $svg->appendChild($text);
         $dom->appendChild($svg);
         return $dom;
