@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/counter', '\App\AccessCounter\Http\Controllers\ShowController@getCounter');
+Route::get('/count.cgi', '\App\AccessCounter\Http\Controllers\ShowController@getCounter');

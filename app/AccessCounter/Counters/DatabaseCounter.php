@@ -20,8 +20,9 @@ class DatabaseCounter
     public function __construct(string $key = null)
     {
         $key = !is_null($key) ? $key : static::DEFAULT_CODE_NAME;
-        $this->data = AccessCounter::firstOrCreate(
+        AccessCounter::firstOrCreate(
             [ 'code' => $key ], [ 'score' => 0 ]);
+        $this->data = AccessCounter::where('code', $key)->lockForUpdate()->first();
     }
 
     public function increase()
